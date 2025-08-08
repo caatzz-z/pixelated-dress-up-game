@@ -7,10 +7,16 @@ body {
   background-repeat: repeat;
   text-align: center;
 }
-.mode-buttons button,
-.skin-buttons button,
-.nav-buttons button,
-#category-buttons button {
+
+.container {
+  padding: 20px;
+}
+
+h1 {
+  color: #d6336c;
+}
+
+button {
   padding: 10px 20px;
   margin: 5px;
   font-size: 16px;
@@ -20,12 +26,14 @@ body {
   border-radius: 10px;
   cursor: pointer;
 }
+
 .character {
   position: relative;
   width: 300px;
   height: 400px;
   margin: 0 auto;
 }
+
 .layer {
   position: absolute;
   width: 100%;
