@@ -1,72 +1,74 @@
 let mode = 'topbottom';
-let index = 0;
-
-const outfits = {
-  topbottom: [
-    {
-      hair: "images/hair1.png",
-      top: "images/top1.png",
-      bottom: "images/skirt1.png",
-      shoes: "images/shoes1.png",
-      hat: "images/hat1.png"
-    },
-    {
-      hair: "images/hair2.png",
-      top: "images/top2.png",
-      bottom: "images/skirt2.png",
-      shoes: "images/shoes2.png",
-      hat: "images/hat2.png"
-    }
-  ],
-  dress: [
-    {
-      dress: "images/dress1.png",
-      hair: "images/hair3.png",
-      shoes: "images/shoes3.png",
-      hat: "images/hat3.png"
-    },
-    {
-      dress: "images/dress2.png",
-      hair: "images/hair4.png",
-      shoes: "images/shoes4.png",
-      hat: "images/hat4.png"
-    }
-  ]
+let currentCategory = 'hair';
+let currentIndexes = {
+  hair: 0,
+  top: 0,
+  bottom: 0,
+  dress: 0,
+  shoes: 0,
+  hat: 0
 };
+
+const items = {
+  hair: ["hair1.png", "hair2.png", "hair3.png", "hair4.png"],
+  top: ["top1.png", "top2.png"],
+  bottom: ["skirt1.png", "skirt2.png"],
+  dress: ["dress1.png", "dress2.png"],
+  shoes: ["shoes1.png", "shoes2.png", "shoes3.png", "shoes4.png"],
+  hat: ["hat1.png", "hat2.png", "hat3.png", "hat4.png"]
+};
+
+const categoriesTopBottom = ["hair", "top", "bottom", "shoes", "hat"];
+const categoriesDress = ["hair", "dress", "shoes", "hat"];
 
 function setMode(newMode) {
   mode = newMode;
-  index = 0;
-  updateOutfit();
+  currentCategory = mode === "dress" ? "dress" : "top";
+  showCategoryButtons();
+  updateLayers();
 }
 
-function setBase(baseName) {
-  document.getElementById("base").src = `images/${baseName}`;
+function setBase(name) {
+  document.getElementById("base").src = "images/" + name;
 }
 
-function updateOutfit() {
-  const current = outfits[mode][index];
+function showCategoryButtons() {
+  const container = document.getElementById("category-buttons");
+  container.innerHTML = "";
+  const cats = mode === "dress" ? categoriesDress : categoriesTopBottom;
 
-  document.getElementById("hair").src = current.hair || "";
-  document.getElementById("top").src = current.top || "";
-  document.getElementById("bottom").src = current.bottom || "";
-  document.getElementById("dress").src = current.dress || "";
-  document.getElementById("shoes").src = current.shoes || "";
-  document.getElementById("hat").src = current.hat || "";
-
-  document.getElementById("top").style.display = mode === "topbottom" ? "block" : "none";
-  document.getElementById("bottom").style.display = mode === "topbottom" ? "block" : "none";
-  document.getElementById("dress").style.display = mode === "dress" ? "block" : "none";
+  cats.forEach(cat => {
+    const btn = document.createElement("button");
+    btn.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+    btn.onclick = () => {
+      currentCategory = cat;
+      updateLayers();
+    };
+    container.appendChild(btn);
+  });
 }
 
-function prevOutfit() {
-  index = (index - 1 + outfits[mode].length) % outfits[mode].length;
-  updateOutfit();
+function updateLayers() {
+  const allLayers = ["hair", "top", "bottom", "dress", "shoes", "hat"];
+  allLayers.forEach(layer => {
+    const el = document.getElementById(layer);
+    if (mode === "dress" && (layer === "top" || layer === "bottom")) {
+      el.style.display = "none";
+      return;
+    }
+    if (mode === "topbottom" && layer === "dress") {
+      el.style.display = "none";
+      return;
+    }
+
+    const index = currentIndexes[layer];
+    const src = items[layer] && items[layer][index];
+    el.src = src ? "images/" + src : "";
+    el.style.display = "block";
+  });
 }
 
-function nextOutfit() {
-  index = (index + 1) % outfits[mode].length;
-  updateOutfit();
-}
-
-setMode('topbottom');
+function prevItem() {
+  if (!items[currentCategory]) return;
+  const max = items[currentCategory].length;
+  currentIndexes[currentCategory] = (currentIndexes[currentCatego]()
