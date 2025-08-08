@@ -1,4 +1,4 @@
-let mode = "topbottom";
+let mode = 'topbottom';
 let index = 0;
 
 const outfits = {
@@ -8,30 +8,30 @@ const outfits = {
       top: "images/top1.png",
       bottom: "images/skirt1.png",
       shoes: "images/shoes1.png",
-      hat: "images/hat1.png",
+      hat: "images/hat1.png"
     },
     {
       hair: "images/hair2.png",
       top: "images/top2.png",
       bottom: "images/skirt2.png",
       shoes: "images/shoes2.png",
-      hat: "images/hat2.png",
-    },
+      hat: "images/hat2.png"
+    }
   ],
   dress: [
     {
       dress: "images/dress1.png",
       hair: "images/hair3.png",
       shoes: "images/shoes3.png",
-      hat: "images/hat3.png",
+      hat: "images/hat3.png"
     },
     {
       dress: "images/dress2.png",
       hair: "images/hair4.png",
       shoes: "images/shoes4.png",
-      hat: "images/hat4.png",
-    },
-  ],
+      hat: "images/hat4.png"
+    }
+  ]
 };
 
 function setMode(newMode) {
@@ -54,12 +54,9 @@ function updateOutfit() {
   document.getElementById("shoes").src = current.shoes || "";
   document.getElementById("hat").src = current.hat || "";
 
-  document.getElementById("top").style.display =
-    mode === "topbottom" ? "block" : "none";
-  document.getElementById("bottom").style.display =
-    mode === "topbottom" ? "block" : "none";
-  document.getElementById("dress").style.display =
-    mode === "dress" ? "block" : "none";
+  document.getElementById("top").style.display = mode === "topbottom" ? "block" : "none";
+  document.getElementById("bottom").style.display = mode === "topbottom" ? "block" : "none";
+  document.getElementById("dress").style.display = mode === "dress" ? "block" : "none";
 }
 
 function prevOutfit() {
@@ -72,4 +69,4 @@ function nextOutfit() {
   updateOutfit();
 }
 
-setMode("topbottom");
+setMode('topbottom');
