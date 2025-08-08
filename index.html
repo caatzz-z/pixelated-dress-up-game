@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dress Up Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Dress Up Game</h1>
+
+    <div class="mode-buttons">
+      <button onclick="setMode('topbottom')">Top & Bottom</button>
+      <button onclick="setMode('dress')">Dress</button>
+    </div>
+
+    <div class="skin-buttons">
+      <span>Skin:</span>
+      <button onclick="setBase('base_light.png')">Light</button>
+      <button onclick="setBase('base_tan.png')">Tan</button>
+      <button onclick="setBase('base_dark.png')">Dark</button>
+    </div>
+
+    <div class="character">
+      <img id="base" class="layer" src="images/base_light.png">
+      <img id="hair" class="layer" src="">
+      <img id="top" class="layer" src="">
+      <img id="bottom" class="layer" src="">
+      <img id="dress" class="layer" src="">
+      <img id="shoes" class="layer" src="">
+      <img id="hat" class="layer" src="">
+    </div>
+
+    <div class="nav-buttons">
+      <button onclick="prevOutfit()">&#60;</button>
+      <button onclick="nextOutfit()">&#62;</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

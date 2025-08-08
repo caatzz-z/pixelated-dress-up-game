@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #ffe6f0;
+  background-image: radial-gradient(#ffcce0 5%, transparent 6%);
+  background-size: 40px 40px;
+  background-repeat: repeat;
+  text-align: center;
+}
+
+.container {
+  padding: 20px;
+}
+
+h1 {
+  color: #d6336c;
+}
+
+.mode-buttons button,
+.skin-buttons button,
+.nav-buttons button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 16px;
+  background-color: #ff99cc;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.character {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+.layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
