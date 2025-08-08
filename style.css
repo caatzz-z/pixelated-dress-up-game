@@ -7,15 +7,6 @@ body {
   background-repeat: repeat;
   text-align: center;
 }
-
-.container {
-  padding: 20px;
-}
-
-h1 {
-  color: #d6336c;
-}
-
 .mode-buttons button,
 .skin-buttons button,
 .nav-buttons button,
@@ -29,14 +20,12 @@ h1 {
   border-radius: 10px;
   cursor: pointer;
 }
-
 .character {
   position: relative;
   width: 300px;
   height: 400px;
   margin: 0 auto;
 }
-
 .layer {
   position: absolute;
   width: 100%;
