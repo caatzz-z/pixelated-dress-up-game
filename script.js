@@ -1,79 +1,78 @@
-let mode = 'topbottom';
-let currentCategory = '';
-const indices = {
-  hair: 0,
-  top: 0,
-  bottom: 0,
-  dress: 0,
-  shoes: 0,
-  hat: 0
+const categories = {
+  dress: ['dress', 'hair', 'hat', 'shoes'],
+  topbottom: ['top', 'bottom', 'hair', 'hat', 'shoes']
 };
 
 const items = {
   hair: ['hair1.png', 'hair2.png', 'hair3.png', 'hair4.png'],
-  top: ['top1.png', 'top2.png'],
-  bottom: ['skirt1.png', 'skirt2.png'],
-  dress: ['dress1.png', 'dress2.png'],
+  hat: ['hat1.png', 'hat2.png', 'hat3.png', 'hat4.png'],
   shoes: ['shoes1.png', 'shoes2.png', 'shoes3.png', 'shoes4.png'],
-  hat: ['hat1.png', 'hat2.png', 'hat3.png', 'hat4.png']
+  dress: ['dress1.png', 'dress2.png'],
+  top: ['top1.png', 'top2.png'],
+  bottom: ['skirt1.png', 'skirt2.png']
 };
 
-const categoriesTopBottom = ['hair', 'top', 'bottom', 'shoes', 'hat'];
-const categoriesDress = ['hair', 'dress', 'shoes', 'hat'];
+let currentMode = 'topbottom';
+let indices = {
+  hair: 0,
+  hat: 0,
+  shoes: 0,
+  dress: 0,
+  top: 0,
+  bottom: 0
+};
 
-function setBase(name) {
-  document.getElementById('base').src = `images/${name}`;
+function setMode(mode) {
+  currentMode = mode;
+  updateButtons();
+  updateImages();
 }
 
-function setMode(newMode) {
-  mode = newMode;
-  currentCategory = '';
-  showCategoryButtons();
-  updateLayers();
+function setBase(baseName) {
+  document.getElementById('base').src = `images/${baseName}`;
 }
 
-function showCategoryButtons() {
-  const container = document.getElementById('category-buttons');
-  container.innerHTML = '';
-  const cats = mode === 'dress' ? categoriesDress : categoriesTopBottom;
-  cats.forEach(cat => {
-    const btn = document.createElement('button');
-    btn.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
-    btn.onclick = () => {
-      currentCategory = cat;
-      updateLayers();
-    };
-    container.appendChild(btn);
+function changeItem(cat, direction) {
+  const list = items[cat];
+  indices[cat] = (indices[cat] + direction + list.length) % list.length;
+  updateImages();
+}
+
+function updateButtons() {
+  const navContainer = document.querySelector('.nav-buttons');
+  navContainer.innerHTML = ''; // Clear buttons
+
+  categories[currentMode].forEach(cat => {
+    const label = document.createElement('span');
+    label.textContent = cat.toUpperCase();
+
+    const left = document.createElement('button');
+    left.textContent = '<';
+    left.onclick = () => changeItem(cat, -1);
+
+    const right = document.createElement('button');
+    right.textContent = '>';
+    right.onclick = () => changeItem(cat, 1);
+
+    navContainer.appendChild(label);
+    navContainer.appendChild(left);
+    navContainer.appendChild(right);
   });
 }
 
-function updateLayers() {
-  document.getElementById('top').style.display = (mode === 'topbottom') ? 'block' : 'none';
-  document.getElementById('bottom').style.display = (mode === 'topbottom') ? 'block' : 'none';
-  document.getElementById('dress').style.display = (mode === 'dress') ? 'block' : 'none';
-
-  for (let key in items) {
-    const el = document.getElementById(key);
-    const index = indices[key];
-    const list = items[key];
-    if (el && list && list[index]) {
-      el.src = `images/${list[index]}`;
+function updateImages() {
+  categories.dress.concat(categories.topbottom).forEach(cat => {
+    const el = document.getElementById(cat);
+    if (categories[currentMode].includes(cat)) {
+      el.style.display = 'block';
+      el.src = `images/${items[cat][indices[cat]]}`;
+    } else {
+      el.style.display = 'none';
     }
-  }
+  });
 }
 
-function prevItem() {
-  if (!currentCategory) return;
-  const list = items[currentCategory];
-  indices[currentCategory] = (indices[currentCategory] - 1 + list.length) % list.length;
-  updateLayers();
-}
-
-function nextItem() {
-  if (!currentCategory) return;
-  const list = items[currentCategory];
-  indices[currentCategory] = (indices[currentCategory] + 1) % list.length;
-  updateLayers();
-}
-
-setMode('topbottom');
+window.onload = function () {
+  setMode('topbottom');
+  setBase('base_light.png');
+};
