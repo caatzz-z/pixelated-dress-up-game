@@ -6,30 +6,37 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Dress Up Game</h1>
-  <div class="mode-buttons">
-    <button onclick="setMode('topbottom')">Top & Bottom</button>
-    <button onclick="setMode('dress')">Dress Mode</button>
-  </div>
-  <div class="skin-buttons">
-    <span>Skin:</span>
-    <button onclick="setBase('base_light.png')">Light</button>
-    <button onclick="setBase('base_tan.png')">Tan</button>
-    <button onclick="setBase('base_dark.png')">Dark</button>
-  </div>
-  <div class="character">
-    <img id="base" class="layer" src="images/base_light.png">
-    <img id="hair" class="layer" src="">
-    <img id="top" class="layer" src="">
-    <img id="bottom" class="layer" src="">
-    <img id="dress" class="layer" src="">
-    <img id="shoes" class="layer" src="">
-    <img id="hat" class="layer" src="">
-  </div>
-  <div id="category-buttons"></div>
-  <div class="nav-buttons">
-    <button onclick="prevItem()">&#60;</button>
-    <button onclick="nextItem()">&#62;</button>
+  <div class="container">
+    <h1>Dress Up Game</h1>
+
+    <div class="mode-buttons">
+      <button onclick="setMode('topbottom')">Top & Bottom</button>
+      <button onclick="setMode('dress')">Dress</button>
+    </div>
+
+    <div class="skin-buttons">
+      <span>Skin:</span>
+      <button onclick="setBase('base_light.png')">Light</button>
+      <button onclick="setBase('base_tan.png')">Tan</button>
+      <button onclick="setBase('base_dark.png')">Dark</button>
+    </div>
+
+    <div id="category-buttons" class="category-buttons"></div>
+
+    <div class="character">
+      <img id="base" class="layer" src="images/base_light.png">
+      <img id="hair" class="layer" src="">
+      <img id="top" class="layer" src="">
+      <img id="bottom" class="layer" src="">
+      <img id="dress" class="layer" src="">
+      <img id="shoes" class="layer" src="">
+      <img id="hat" class="layer" src="">
+    </div>
+
+    <div class="nav-buttons">
+      <button onclick="prevItem()">&#60;</button>
+      <button onclick="nextItem()">&#62;</button>
+    </div>
   </div>
 
   <script src="script.js"></script>
